@@ -1,0 +1,16 @@
+# EN или RU
+# EN or RU
+locale: ru
+
+# Телепортировать игрока на спавн при первом входе?
+# Teleport the player to the spawn point upon first login?
+teleportOnFirstJoin: true
+
+# Точка спавна будет сохраняться сюда:
+# spawn:
+#   world: world
+#   x: 0.0
+#   y: 64.0
+#   z: 0.0
+#   yaw: 0.0
+#   pitch: 0.0

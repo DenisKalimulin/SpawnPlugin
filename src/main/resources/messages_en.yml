@@ -1,0 +1,8 @@
+onlyPlayers: "&cThis command can only be used by players."
+spawnEnabled: "&aSpawn enabled."
+spawnDisable: "&cSpawn disabled."
+spawnSet: "&aSpawn point set."
+spawnTp: "&aTeleported to spawn!"
+spawnNotSet: "&eSpawn is not set yet."
+firstJoinTp: "&aWelcome! Teleporting you to spawn..."
+noAccessToSetSpawn: "&cYou do not have permission to use this command."

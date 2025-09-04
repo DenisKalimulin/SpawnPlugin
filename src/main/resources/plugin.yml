@@ -1,0 +1,20 @@
+name: SpawnPlugin
+main: ru.spawn.plugin.SpawnPlugin
+version: 1.0.0
+api-version: 1.20
+
+commands:
+  spawn:
+    description: Телепортация на спавн
+    usage: /spawn
+    permission: simple.spawn
+  setspawn:
+    description: Задать точку спавна
+    usage: /setspawn
+    permission: simple.setspawn
+
+permissions:
+  simple.spawn:
+    default: true
+  simple.setspawn:
+    default: op
