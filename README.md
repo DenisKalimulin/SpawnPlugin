@@ -1,6 +1,6 @@
-# SimpleSpawn
+# SpawnPlugin
 
-**SimpleSpawn** — это лёгкий Minecraft-плагин для Paper/Spigot, который позволяет:
+**SpawnPlugin** — это лёгкий Minecraft-плагин для Paper/Spigot, который позволяет:
 - Устанавливать точку спавна (`/setspawn`)
 - Телепортироваться на спавн (`/spawn`)
 - Автоматически телепортировать игрока на спавн при первом входе
