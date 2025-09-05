@@ -6,11 +6,12 @@ locale: ru
 # Teleport the player to the spawn point upon first login?
 teleportOnFirstJoin: true
 
-# Точка спавна будет сохраняться сюда:
-# spawn:
-#   world: world
-#   x: 0.0
-#   y: 64.0
-#   z: 0.0
-#   yaw: 0.0
-#   pitch: 0.0
+spawn:
+  cooldownSeconds: 10     # КД на /spawn
+  warmupSeconds: 3        # Задержка перед ТП
+  cancelOnMove: true      # Отменять, если игрок двинулся
+
+  antiSpam:
+    enabled: true
+    windowSeconds: 5        # окно для подсчёта спама
+    maxCommands: 5          # макс. команд за окно
