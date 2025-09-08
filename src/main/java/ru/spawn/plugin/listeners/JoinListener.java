@@ -15,9 +15,9 @@ public class JoinListener implements Listener {
     }
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent e) {
+    public void onJoin(PlayerJoinEvent event) {
         if (!plugin.getConfig().getBoolean("teleportOnFirstJoin", true)) return;
-        Player player = e.getPlayer();
+        Player player = event.getPlayer();
         if (player.hasPlayedBefore()) return;
 
         Location spawn = plugin.getSpawnLocation();

@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import ru.spawn.plugin.listeners.JoinListener;
+import ru.spawn.plugin.listeners.RespawnListener;
 
 public class SpawnPlugin extends JavaPlugin {
 
@@ -29,6 +30,7 @@ public class SpawnPlugin extends JavaPlugin {
         getLogger().info("Spawn loaded? " + (spawnLocation != null));
 
         getServer().getPluginManager().registerEvents(new JoinListener(this), this);
+        getServer().getPluginManager().registerEvents(new RespawnListener(this), this);
     }
 
     @Override

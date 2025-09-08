@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-
 public class AntiSpamListener implements Listener {
     private final SpawnPlugin plugin;
     private final Map<UUID, Deque<Long>> hist = new HashMap<>();

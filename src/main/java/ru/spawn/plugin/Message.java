@@ -15,8 +15,8 @@ public class Message {
         plugin.saveResource("messages_ru.yml", false);
 
         String fileName = "messages_" + (Objects.equals(locale, "ru") ? "ru" : "en") + ".yml";
-        File f = new File(plugin.getDataFolder(), fileName);
-        this.config = YamlConfiguration.loadConfiguration(f);
+        File file = new File(plugin.getDataFolder(), fileName);
+        this.config = YamlConfiguration.loadConfiguration(file);
     }
 
     public String tr(String key) {
