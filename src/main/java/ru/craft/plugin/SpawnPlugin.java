@@ -31,17 +31,21 @@ public class SpawnPlugin extends JavaPlugin {
     public void onEnable() {
         saveDefaultConfig();
 
-        // Инициализация БД
-        databaseUtil = new DatabaseUtil(this);
-        databaseUtil.setupDatabase();
-        databaseUtil.createTables();
-
         loadSpawn();
 
         String locale = getConfig().getString("locale", "ru");
         this.message = new Message(this, locale);
         this.spawnManager = new SpawnManager(this);
         this.homeManager = new HomeManager(this);
+
+        // Инициализация БД
+        if (homeManager.isSql()) {
+            databaseUtil = new DatabaseUtil(this);
+            databaseUtil.setupDatabase();
+            databaseUtil.createTables();
+        } else {
+            getLogger().info("Запись в файл");
+        }
 
         // Слушатели
         getServer().getPluginManager().registerEvents(new JoinListener(this), this);
@@ -50,6 +54,7 @@ public class SpawnPlugin extends JavaPlugin {
 
         Objects.requireNonNull(getCommand("sethome")).setExecutor(new HomeCommand(this));
         Objects.requireNonNull(getCommand("home")).setExecutor(new HomeCommand(this));
+        Objects.requireNonNull(getCommand("delhome")).setExecutor(new HomeCommand(this));
 
         // Логи для диагностики
         getLogger().info(message.tr("spawnEnabled") + " (" + locale + ")");
@@ -72,9 +77,12 @@ public class SpawnPlugin extends JavaPlugin {
 
         String name = command.getName().toLowerCase();
         switch (name) {
-            case "setspawn": return handleSetSpawn(player);
-            case "spawn":    return handleSpawn(player);
-            default:         return false;
+            case "setspawn":
+                return handleSetSpawn(player);
+            case "spawn":
+                return handleSpawn(player);
+            default:
+                return false;
         }
     }
 

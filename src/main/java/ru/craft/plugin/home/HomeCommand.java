@@ -25,6 +25,7 @@ public class HomeCommand implements CommandExecutor {
                 plugin.getHomeManager().setHome(player, player.getLocation());
                 player.sendMessage(plugin.getMessage().tr("homeSet"));
                 return true;
+
             case "home":
                 var home = plugin.getHomeManager().getHome(player);
                 if (home == null) {
@@ -34,8 +35,13 @@ public class HomeCommand implements CommandExecutor {
                 player.teleport(home);
                 player.sendMessage(plugin.getMessage().tr("homeTeleport"));
                 return true;
+
+            case "delhome":
+                boolean deleted = plugin.getHomeManager().deleteHome(player);
+                player.sendMessage(deleted ? plugin.getMessage().tr("homeDeleted")
+                                   : plugin.getMessage().tr("homeNotDeleted"));
+                return true;
         }
         return false;
     }
 }
-

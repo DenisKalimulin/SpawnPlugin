@@ -15,24 +15,45 @@ public class DatabaseUtil {
     @Getter
     private HikariDataSource dataSource;
 
+
+
     public DatabaseUtil(SpawnPlugin plugin) {
         this.plugin = plugin;
     }
 
     public void setupDatabase() {
-        HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:mysql://" +
-                plugin.getConfig().getString("database.host") + ":" +
-                plugin.getConfig().getInt("database.port") + "/" +
-                plugin.getConfig().getString("database.name") +
-                "?useSSL=false&autoReconnect=true&characterEncoding=utf8");
+        HikariConfig cfg = new HikariConfig();
 
-        config.setUsername(plugin.getConfig().getString("database.user"));
-        config.setPassword(plugin.getConfig().getString("database.password"));
-        config.setMaximumPoolSize(10);
+        String host = plugin.getConfig().getString("database.host");
+        int    port = plugin.getConfig().getInt("database.port");
+        String db   = plugin.getConfig().getString("database.name");
 
-        dataSource = new HikariDataSource(config);
+        // Если используешь SSL, поменяй useSSL/sslMode ниже.
+        String url = "jdbc:mysql://" + host + ":" + port + "/" + db
+                + "?useUnicode=true"
+                + "&characterEncoding=utf8"
+                + "&serverTimezone=UTC"
+                + "&useSSL=false"
+                + "&allowPublicKeyRetrieval=true" // <-- фикс твоей ошибки
+                + "&cachePrepStmts=true&prepStmtCacheSize=250&prepStmtCacheSqlLimit=2048";
+
+        cfg.setJdbcUrl(url);
+        cfg.setUsername(plugin.getConfig().getString("database.user"));
+        cfg.setPassword(plugin.getConfig().getString("database.password"));
+
+        // Параметры пула — разумные дефолты
+        cfg.setPoolName("SpawnPluginPool");
+        cfg.setMaximumPoolSize(10);
+        cfg.setMinimumIdle(2);
+        cfg.setConnectionTimeout(10000); // 10s
+        cfg.setIdleTimeout(600000);      // 10 min
+        cfg.setMaxLifetime(1800000);     // 30 min
+        cfg.setValidationTimeout(5000);
+        cfg.setConnectionTestQuery("SELECT 1");
+
+        dataSource = new HikariDataSource(cfg);
     }
+
 
     public void createTables() {
         String sql = "CREATE TABLE IF NOT EXISTS homes (" +

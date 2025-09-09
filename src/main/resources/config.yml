@@ -16,6 +16,9 @@ spawn:
     windowSeconds: 5        # окно для подсчёта спама
     maxCommands: 5          # макс. команд за окно
 
+storage:
+  homes: file               # варианты: db (MySQL) | file
+
 database:
   host: localhost
   port: 3306
