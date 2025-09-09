@@ -1,6 +1,6 @@
 name: SpawnPlugin
 main: ru.spawn.plugin.SpawnPlugin
-version: 1.0.0
+version: 2.1.2
 api-version: 1.20
 author: Kalimulin.D.A
 
@@ -9,10 +9,19 @@ commands:
     description: Телепортация на спавн
     usage: /spawn
     permission: simple.spawn
+
   setspawn:
     description: Задать точку спавна
     usage: /setspawn
     permission: simple.setspawn
+
+  sethome:
+    description: Установить точку дома
+    usage: /sethome
+
+  home:
+    description: Телепортация домой
+    usage: /home
 
 permissions:
   simple.spawn:

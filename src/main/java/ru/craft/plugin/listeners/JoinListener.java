@@ -1,11 +1,11 @@
-package ru.spawn.plugin.listeners;
+package ru.craft.plugin.listeners;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import ru.spawn.plugin.SpawnPlugin;
+import ru.craft.plugin.SpawnPlugin;
 
 public class JoinListener implements Listener {
     private final SpawnPlugin plugin;

@@ -1,4 +1,4 @@
-package ru.spawn.plugin;
+package ru.craft.plugin;
 
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -11,8 +11,8 @@ public class Message {
     private final FileConfiguration config;
 
     public Message(SpawnPlugin plugin, String locale) {
-        plugin.saveResource("messages_en.yml", false);
-        plugin.saveResource("messages_ru.yml", false);
+        plugin.saveResource("messages/messages_en.yml", false);
+        plugin.saveResource("messages/messages_ru.yml", false);
 
         String fileName = "messages_" + (Objects.equals(locale, "ru") ? "ru" : "en") + ".yml";
         File file = new File(plugin.getDataFolder(), fileName);

@@ -1,5 +1,6 @@
-package ru.spawn.plugin;
+package ru.craft.plugin;
 
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -7,44 +8,59 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import ru.spawn.plugin.listeners.JoinListener;
-import ru.spawn.plugin.listeners.RespawnListener;
+import ru.craft.plugin.home.HomeCommand;
+import ru.craft.plugin.home.HomeManager;
+import ru.craft.plugin.listeners.AntiSpamListener;
+import ru.craft.plugin.listeners.JoinListener;
+import ru.craft.plugin.listeners.RespawnListener;
+import ru.craft.plugin.spawn.SpawnManager;
+import ru.craft.plugin.util.DatabaseUtil;
 
+import java.util.Objects;
+
+@Getter
 public class SpawnPlugin extends JavaPlugin {
 
     private Location spawnLocation;
     private SpawnManager spawnManager;
     private Message message;
+    private DatabaseUtil databaseUtil;
+    private HomeManager homeManager;
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
+
+        // Инициализация БД
+        databaseUtil = new DatabaseUtil(this);
+        databaseUtil.setupDatabase();
+        databaseUtil.createTables();
+
         loadSpawn();
 
         String locale = getConfig().getString("locale", "ru");
         this.message = new Message(this, locale);
         this.spawnManager = new SpawnManager(this);
+        this.homeManager = new HomeManager(this);
+
+        // Слушатели
+        getServer().getPluginManager().registerEvents(new JoinListener(this), this);
+        getServer().getPluginManager().registerEvents(new RespawnListener(this), this);
+        getServer().getPluginManager().registerEvents(new AntiSpamListener(this), this);
+
+        Objects.requireNonNull(getCommand("sethome")).setExecutor(new HomeCommand(this));
+        Objects.requireNonNull(getCommand("home")).setExecutor(new HomeCommand(this));
 
         // Логи для диагностики
         getLogger().info(message.tr("spawnEnabled") + " (" + locale + ")");
         getLogger().info("Spawn loaded? " + (spawnLocation != null));
-
-        getServer().getPluginManager().registerEvents(new JoinListener(this), this);
-        getServer().getPluginManager().registerEvents(new RespawnListener(this), this);
     }
 
     @Override
     public void onDisable() {
         saveSpawn();
+        databaseUtil.close();
         getLogger().info(message.tr("spawnDisable"));
-    }
-
-    public Message getMessage() {
-        return message;
-    }
-
-    public Location getSpawnLocation() {
-        return spawnLocation;
     }
 
     @Override

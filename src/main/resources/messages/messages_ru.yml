@@ -10,3 +10,6 @@ spawnCooldown: "&eПодожди %s сек. до использования /spa
 spawnWarmup: "&aТелепортация через %s сек. Не двигайся!"
 spawnWarmupCancelled: "&cТелепортация отменена: ты двигался."
 tooManyCommands: "&cСлишком много команд! Подожди немного."
+homeSet: "§aДом установлен!"
+homeNotSet: "§cДом не установлен. Используй /sethome"
+homeTeleport: "§aТелепорт домой..."

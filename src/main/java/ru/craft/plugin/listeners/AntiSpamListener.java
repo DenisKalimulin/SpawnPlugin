@@ -1,9 +1,9 @@
-package ru.spawn.plugin.listeners;
+package ru.craft.plugin.listeners;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import ru.spawn.plugin.SpawnPlugin;
+import ru.craft.plugin.SpawnPlugin;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
