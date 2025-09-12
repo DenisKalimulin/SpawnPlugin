@@ -21,7 +21,7 @@ public class BackCommand implements CommandExecutor {
             snd.sendMessage(plugin.getMessage().tr("onlyPlayers"));
             return true;
         }
-        if (!p.hasPermission("simplespawn.back")) {
+        if (!p.hasPermission("simple.back")) {
             p.sendMessage(plugin.getMessage().tr("backNoPermission"));
             return true;
         }
